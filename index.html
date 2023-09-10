@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blur Images</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    .grid {
+      margin: 0 auto;
+      max-width: 768px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      aspect-ratio: 9/16;
+    }
+
+    .blur-load {
+      position: relative;
+      filter: blur(10px);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .blur-load.loaded {
+      filter: blur(0);
+    }
+
+    .blur-load > img {
+      opacity: 0;
+    }
+
+    .blur-load.loaded > img {
+      opacity: 1;
+      transition: opacity 300ms ease-in-out;
+    }
+
+    .blur-load::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      animation: pulse 1s infinite alternate-reverse;
+    }
+
+    .blur-load.loaded::before {
+      content: none;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      from {
+        background-color: rgba(255, 255, 255, 0);
+      }
+      to {
+        background-color: rgba(255, 255, 255, .1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <picture class="blur-load" style="background-image: url(images/img1-small.jpg);">
+      <img loading="lazy" src="images/img1.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img2-small.jpg);">
+      <img loading="lazy" src="images/img2.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img3-small.jpg);">
+      <img loading="lazy" src="images/img3.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img4-small.jpg);">
+      <img loading="lazy" src="images/img4.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img5-small.jpg);">
+      <img loading="lazy" src="images/img5.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img6-small.jpg);">
+      <img loading="lazy" src="images/img6.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img7-small.jpg);">
+      <img loading="lazy" src="images/img7.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img8-small.jpg);">
+      <img loading="lazy" src="images/img8.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img9-small.jpg);">
+      <img loading="lazy" src="images/img9.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img10-small.jpg);">
+      <img loading="lazy" src="images/img10.jpg">
+    </picture>
+        <picture class="blur-load" style="background-image: url(images/img11-small.jpg);">
+      <img loading="lazy" src="images/img11.jpg">
+    </picture>
+    <picture class="blur-load" style="background-image: url(images/img12-small.jpg);">
+      <img loading="lazy" src="images/img12.jpg">
+    </picture>
+  </div>
+
+  <script>
+
+    const divImages = document.querySelectorAll('.blur-load')
+
+    divImages.forEach(div => {
+      const img = div.querySelector('img')
+
+      function loaded() {
+        div.classList.add('loaded')
+      }
+
+      if (img.complete) {
+        loaded()
+      } else {
+        img.addEventListener('load', loaded)
+      }
+
+
+    })
+
+  </script>
+
+  
+
+</body>
+</html>
